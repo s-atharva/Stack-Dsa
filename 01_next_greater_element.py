@@ -1,33 +1,22 @@
-from collections import deque
-
 nums = [1, 3, 2, 4]
-arr = []
-stack = deque()
+stack = []
+n = len(nums)
+ans = []
 
-for i in range(len(nums) - 1, -1, -1):
-    if not stack:
-        arr.append(-1)
-    elif stack and stack[-1] > nums[i]:
-        arr.append(stack[-1])
+for i in range(n - 1, -1, -1):
+    if len(stack) == 0:
+        ans.append(-1)
+    elif len(stack) > 0 and stack[-1] > nums[i]:
+        ans.append(stack[-1])
     else:
-        while stack and stack[-1] <= nums[i]:
+        while len(stack) and stack[-1] <= nums[i]:
             stack.pop()
-        if not stack:
-            arr.append(-1)
+        if len(stack):
+            ans.append(stack[-1])
         else:
-            arr.append(stack[-1])
+            ans.append(stack[-1])
     stack.append(nums[i])
 
-# mutable
-arr.reverse()
-print(arr)
 
-
-# stack = []
-# stack.append(1)
-# stack.append(2)
-# stack.append(3)
-#
-# print(stack)
-# stack.pop()
-# print(stack)
+ans.reverse()
+print(ans)
